@@ -1,14 +1,18 @@
 import threading
 import socket
+from pyngrok import ngrok
+import os
 
+
+port=1234
 
 server=socket.socket(socket.AF_INET,socket.SOCK_STREAM)   
-HOST='127.0.0.1'
-PORT=4444
-server.bind((HOST,PORT))
-server.listen()
+server.bind(("",port))
+server.listen(2)
 
 
+public_url = ngrok.connect(port,"tcp")
+print("ngrok tunnel \"{}\" -> \"tcp://127.0.0.1:{}\"".format(public_url, port))
 
 clients=[]
 names=[]
@@ -47,5 +51,3 @@ def recieve():
 
 
 recieve()
-
-
