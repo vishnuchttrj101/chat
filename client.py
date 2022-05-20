@@ -1,9 +1,12 @@
 import socket
 import threading
-nickname=input("choose a nickname:")
+addr=input("Input the server's address:")
+ur=addr.split(":")[0]
+PORT=int(addr.split(":")[1])
+nickname=input("Please choose a nickname for you: ")
+HOST=socket.gethostbyname(ur)
 
-HOST='127.0.0.1'
-PORT=4444
+
 client=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 client.connect((HOST,PORT))
 
@@ -40,5 +43,3 @@ recieve_thread.start()
 
 write_thread=threading.Thread(target=write)
 write_thread.start()
-
-
