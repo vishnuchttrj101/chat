@@ -1,5 +1,9 @@
 import socket
 import threading
+import tkinter
+import pyautogui as pag
+from tkinter import messagebox
+
 addr=input("Input the server's address:")
 ur=addr.split(":")[0]
 PORT=int(addr.split(":")[1])
@@ -22,6 +26,11 @@ def recieve():
                 client.send(nickname.encode('ascii'))
             else:
                 print(message)
+                root = tkinter.Tk()
+                root.withdraw()
+                messagebox.showinfo("Title", message)
+                root.update()
+                
         
         except:
             print("An error occured")
@@ -43,3 +52,4 @@ recieve_thread.start()
 
 write_thread=threading.Thread(target=write)
 write_thread.start()
+
